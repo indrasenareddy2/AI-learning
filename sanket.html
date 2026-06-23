@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sanket Raj</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap');
+:root{--bg:#faf7f2;--card:#f3eee6;--text:#171717;--muted:#6f6f6f;--accent:#b22222;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Manrope,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:28px;border:1px solid rgba(178,34,34,.08);pointer-events:none;z-index:9998}
+body:after{content:"";position:fixed;inset:16px;border:1px solid rgba(178,34,34,.18);pointer-events:none;z-index:9999}
+.container{max-width:1180px;margin:auto;padding:0 32px}
+nav{position:fixed;top:0;width:100%;background:rgba(250,247,242,.88);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,.05);z-index:99}
+.nav{height:72px;display:flex;justify-content:space-between;align-items:center}
+nav a{text-decoration:none;color:var(--muted);margin-left:24px}
+.hero{min-height:100vh;display:flex;align-items:center}
+.hello{color:var(--accent);font-weight:800;letter-spacing:.15em}
+h1{font-size:clamp(3.5rem,8vw,6rem);line-height:.9;letter-spacing:-.07em}
+.role{margin-top:14px;color:var(--accent);font-size:1.15rem}
+.desc{max-width:650px;margin-top:22px;color:var(--muted);line-height:1.9}
+.btn{display:inline-block;margin-top:30px;padding:14px 24px;background:var(--accent);color:#fff;text-decoration:none;border-radius:12px}
+section{padding:90px 0}
+h2{font-size:2.5rem;margin-bottom:24px}
+.card{background:var(--card);padding:28px;border:1px solid rgba(0,0,0,.05);transition:.35s}
+.card:hover{transform:translateY(-5px)}
+.bento{display:grid;grid-template-columns:2fr 1fr;gap:18px}
+.small,.projects,.contactgrid,.hobbies{display:grid;gap:18px}
+.small{grid-template-columns:1fr}
+.projects,.contactgrid,.hobbies{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.expand .extra{max-height:0;overflow:hidden;opacity:0;transition:.35s}
+.expand:hover .extra{max-height:120px;opacity:1;margin-top:12px}
+.chip{display:inline-block;background:#fff;padding:6px 10px;margin:4px;border:1px solid rgba(0,0,0,.08)}
+.label{font-size:.75rem;letter-spacing:.2em;color:var(--accent);margin-bottom:10px;text-transform:uppercase}
+p{color:var(--muted);line-height:1.8}
+.contact-card{cursor:pointer;position:relative;overflow:hidden}
+.contact-card:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent,rgba(178,34,34,.08),transparent);transform:translateX(-100%);transition:.6s}
+.contact-card:hover:before{transform:translateX(100%)}
+.contact-value{font-size:1.1rem;color:var(--text);margin-top:10px}
+.footer-space{height:180px}
+.reveal{opacity:0;transform:translateY(20px);transition:.8s}
+.reveal.show{opacity:1;transform:none}
+@media(max-width:800px){.bento{grid-template-columns:1fr}.links{display:none}body:before,body:after{inset:8px}}
+
+.focus-card{position:relative;overflow:hidden}
+.focus-extra{max-height:0;opacity:0;transition:.35s;overflow:hidden}
+.focus-card:hover .focus-extra{max-height:120px;opacity:1;margin-top:10px}
+</style>
+</head>
+<body>
+<nav><div class="container nav"><strong></strong><div class="links"><a href="#about">About</a><a href="#projects">Projects</a><a href="#contact">Contact</a></div></div></nav>
+
+<div class="container hero">
+<div>
+<div class="hello">HELLO WORLD! 👋</div>
+<h1>Sanket Raj</h1>
+<div class="role">AI Engineer</div>
+<p class="desc">Building intelligent systems, exploring machine learning, and turning ideas into practical products. Based in Bangalore, India.</p>
+<a class="btn" href="#contact">Let's Connect</a>
+</div>
+</div>
+
+<section id="about" class="container reveal">
+<h2>About</h2>
+<div class="bento">
+<div class="card"><div class="label">Professional Summary</div><p>AI Engineer at WikiWorks.<br><br>Information Science & Engineering graduate from Dayananda Sagar Academy of Technology and Management (DSATM), graduated in May 2026.<br><br>Focused on machine learning, large language models, and building practical AI-powered products that solve real-world problems.</p></div>
+<div class="small">
+<div class="card"><div class="label">Education</div><p>B.E. Information Science & Engineering<br>DSATM • 2026</p></div>
+<div class="card"><div class="label">Fun Fact</div><p>My playlists have better organization than most databases I've worked with.</p></div>
+</div>
+</div>
+</section>
+
+<section class="container reveal">
+<h2>Hobbies & Interests</h2>
+<div class="hobbies">
+<div class="card expand"><h3>📚 Reading Books</h3><div class="extra"><span class="chip">Atomic Habits</span><span class="chip">Deep Work</span><span class="chip">Psychology of Money</span></div></div>
+<div class="card expand"><h3>🎬 Movies</h3><div class="extra"><span class="chip">Netflix</span><span class="chip">Prime Video</span><span class="chip">Sci‑Fi</span></div></div>
+<div class="card expand"><h3>🎤 TED Talks</h3><div class="extra"><span class="chip">Technology</span><span class="chip">AI</span><span class="chip">Startups</span></div></div>
+<div class="card expand"><h3>⚽ Sports</h3><div class="extra"><span class="chip">Football</span><span class="chip">Cricket</span></div></div>
+<div class="card expand"><h3>🤖 Building with AI</h3><div class="extra"><span class="chip">LLMs</span><span class="chip">Agents</span><span class="chip">Automation</span></div></div>
+</div>
+</section>
+
+<section id="projects" class="container reveal">
+<h2>Selected Projects</h2>
+<div class="projects">
+<div class="card"><div class="label">Machine Learning</div><h3>Sentiment Analysis</h3><p>Analyzes textual data and classifies sentiment.</p></div>
+<div class="card"><div class="label">Healthcare AI</div><h3>Disease Prediction</h3><p>Predictive healthcare model using machine learning.</p></div>
+<div class="card"><div class="label">Product</div><h3>Bites Tracker</h3><p>Tracks food habits and nutrition insights.</p></div>
+</div>
+</section>
+
+<section id="contact" class="container reveal">
+<h2>Contact</h2>
+<div class="contactgrid">
+<div class="card contact-card"><div class="label">Email</div><div class="contact-value">sanketraj01x@gmail.com</div></div>
+<div class="card contact-card"><div class="label">Phone</div><div class="contact-value">+91 7004328959</div></div>
+<div class="card contact-card"><div class="label">GitHub</div><div class="contact-value">github.com/SanketRaj06</div></div>
+<div class="card contact-card"><div class="label">LinkedIn</div><div class="contact-value">linkedin.com/in/sanket-raj</div></div>
+</div>
+</section>
+
+<div class="footer-space"></div>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('show')));
+document.querySelectorAll('.reveal').forEach(x=>io.observe(x));
+
+document.querySelectorAll('.contact-card').forEach(card=>{
+card.addEventListener('mousemove',e=>{
+const r=card.getBoundingClientRect();
+const x=(e.clientX-r.left)/r.width*100;
+card.style.background=`linear-gradient(135deg, var(--card) ${x}%, #f8f4ee)`;
+});
+card.addEventListener('mouseleave',()=>card.style.background='var(--card)');
+});
+</script>
+</body>
+</html>
