@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Thallapalli Indrasena Reddy — AI/ML Engineer building production-grade intelligent systems.">
+  <meta name="theme-color" content="#05070c">
+  <title>Thallapalli Indrasena Reddy — AI/ML Engineer</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --ink: #f5f7ff;
+      --muted: #9aa4b7;
+      --bg: #05070c;
+      --panel: rgba(13, 17, 28, .72);
+      --line: rgba(255, 255, 255, .1);
+      --cyan: #65e8ff;
+      --violet: #9b7bff;
+      --lime: #b7ff69;
+      --mx: 50%;
+      --my: 25%;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scrollbar-color: var(--violet) var(--bg); }
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: Manrope, system-ui, sans-serif;
+      cursor: default;
+    }
+    body::before {
+      content: "";
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background: radial-gradient(600px circle at var(--mx) var(--my), rgba(101,232,255,.08), transparent 42%);
+    }
+    ::selection { background: var(--cyan); color: #041014; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+    .noise {
+      position: fixed; inset: 0; z-index: 30; pointer-events: none; opacity: .04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.75'/%3E%3C/svg%3E");
+    }
+    .progress { position: fixed; z-index: 40; top: 0; left: 0; width: 0; height: 2px; background: linear-gradient(90deg,var(--cyan),var(--violet),var(--lime)); box-shadow: 0 0 18px var(--cyan); }
+    .shell { width: min(1180px, calc(100% - 44px)); margin-inline: auto; }
+    .mono { font-family: "DM Mono", monospace; }
+
+    nav {
+      position: fixed; z-index: 20; top: 18px; left: 50%; transform: translateX(-50%);
+      width: min(1180px, calc(100% - 32px)); height: 62px; padding: 0 12px 0 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      border: 1px solid var(--line); border-radius: 18px;
+      background: rgba(5,7,12,.62); backdrop-filter: blur(18px); box-shadow: 0 18px 50px rgba(0,0,0,.22);
+    }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -.03em; }
+    .brand-mark { width: 30px; aspect-ratio: 1; display: grid; place-items: center; border-radius: 9px; color: #061014; background: var(--cyan); box-shadow: 0 0 24px rgba(101,232,255,.35); font-size: 13px; }
+    .nav-links { display: flex; gap: 27px; color: var(--muted); font-size: 13px; font-weight: 600; }
+    .nav-links a { transition: color .25s; }
+    .nav-links a:hover { color: var(--ink); }
+    .available { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 12px; padding: 10px 13px; font-size: 11px; color: #c5cddd; }
+    .available i { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 12px var(--lime); animation: pulse 1.8s infinite; }
+
+    .hero { position: relative; min-height: 100svh; display: flex; align-items: center; overflow: hidden; isolation: isolate; }
+    #space { z-index: -3; }
+    .aurora { position: absolute; z-index: -2; filter: blur(90px); border-radius: 50%; opacity: .22; animation: drift 11s ease-in-out infinite alternate; }
+    .aurora.a { width: 34vw; height: 34vw; background: var(--violet); right: -12vw; top: 5%; }
+    .aurora.b { width: 27vw; height: 27vw; background: var(--cyan); left: -12vw; bottom: -3%; animation-delay: -5s; }
+    .grid-floor { position: absolute; z-index: -1; width: 150%; height: 52%; left: -25%; bottom: -33%; transform: perspective(460px) rotateX(63deg); transform-origin: center top; background-image: linear-gradient(rgba(101,232,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(101,232,255,.1) 1px,transparent 1px); background-size: 52px 52px; mask-image: linear-gradient(to bottom,black,transparent 80%); }
+    .hero-inner { padding-top: 105px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 60px; align-items: center; }
+    .eyebrow { display: flex; align-items: center; gap: 12px; color: var(--cyan); text-transform: uppercase; font-size: 11px; letter-spacing: .18em; }
+    .eyebrow::before { content:""; width: 36px; height: 1px; background: currentColor; }
+    h1 { margin: 22px 0 26px; font-size: clamp(58px, 8vw, 112px); line-height: .9; letter-spacing: -.072em; font-weight: 800; }
+    h1 .hello { display: block; color: transparent; -webkit-text-stroke: 1px rgba(245,247,255,.54); }
+    h1 .world { display: block; background: linear-gradient(105deg,#fff 12%,var(--cyan) 54%,var(--violet)); -webkit-background-clip: text; color: transparent; filter: drop-shadow(0 0 32px rgba(101,232,255,.18)); }
+    .intro { max-width: 650px; font-size: clamp(17px,1.7vw,21px); line-height: 1.65; color: #acb5c7; }
+    .intro strong { color: var(--ink); font-weight: 600; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .btn { position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 11px; padding: 14px 19px; border: 1px solid var(--line); border-radius: 13px; font-size: 13px; font-weight: 700; transition: .3s ease; }
+    .btn.primary { background: var(--ink); color: #080b12; border-color: var(--ink); }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 16px 36px rgba(0,0,0,.24); border-color: rgba(101,232,255,.45); }
+    .btn svg { width: 16px; }
+
+    .orbital-wrap { min-height: 520px; display: grid; place-items: center; perspective: 1000px; }
+    .orbital { position: relative; width: min(420px,80vw); aspect-ratio: 1; transform-style: preserve-3d; animation: float 6s ease-in-out infinite; }
+    .core { position:absolute; inset: 31%; border-radius: 35%; transform: rotate(45deg) translateZ(50px); background: linear-gradient(145deg,rgba(101,232,255,.28),rgba(155,123,255,.08)); border: 1px solid rgba(166,239,255,.45); box-shadow: inset 0 0 35px rgba(101,232,255,.12),0 0 80px rgba(101,232,255,.13); backdrop-filter: blur(8px); }
+    .core::after { content:"IR"; position:absolute; inset:0; display:grid; place-items:center; transform:rotate(-45deg); font-size:46px; font-weight:800; letter-spacing:-.08em; text-shadow:0 0 24px var(--cyan); }
+    .ring { position:absolute; inset: 14%; border:1px solid rgba(255,255,255,.15); border-radius:50%; transform-style:preserve-3d; }
+    .ring.r1 { animation: spin 14s linear infinite; transform: rotateX(67deg) rotateZ(12deg); }
+    .ring.r2 { inset: 5%; animation: spin2 19s linear infinite; border-color: rgba(155,123,255,.22); transform: rotateY(68deg) rotateX(24deg); }
+    .ring.r3 { inset: 23%; animation: spin 10s linear infinite reverse; border-color: rgba(183,255,105,.22); transform: rotateX(45deg) rotateY(45deg); }
+    .satellite { position:absolute; width:11px; aspect-ratio:1; top:-5px; left:50%; border-radius:50%; background:var(--cyan); box-shadow:0 0 18px var(--cyan); }
+    .r2 .satellite { background:var(--violet); box-shadow:0 0 18px var(--violet); }
+    .r3 .satellite { background:var(--lime); box-shadow:0 0 18px var(--lime); }
+    .orbit-label { position:absolute; padding:8px 11px; border:1px solid var(--line); background:rgba(9,12,20,.74); backdrop-filter:blur(10px); border-radius:9px; color:#bdc6d8; font-size:10px; letter-spacing:.1em; box-shadow:0 12px 25px rgba(0,0,0,.25); }
+    .orbit-label.l1 { left:2%; top:20%; } .orbit-label.l2 { right:-2%; top:40%; } .orbit-label.l3 { left:10%; bottom:14%; }
+    .scroll-hint { position:absolute; bottom:24px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:9px; color:#6f7889; font-size:10px; letter-spacing:.12em; text-transform:uppercase; }
+    .scroll-hint span { width:26px;height:39px;border:1px solid var(--line);border-radius:13px;position:relative; }
+    .scroll-hint span::after { content:"";position:absolute;top:8px;left:50%;width:3px;height:7px;background:var(--cyan);border-radius:3px;animation:scroll 1.8s infinite; }
+
+    section { position: relative; padding: 130px 0; }
+    .section-head { display:flex; justify-content:space-between; gap:30px; align-items:end; margin-bottom:54px; }
+    .kicker { color:var(--cyan);font-size:11px;letter-spacing:.17em;text-transform:uppercase;margin-bottom:15px; }
+    h2 { font-size:clamp(38px,5vw,66px);line-height:1.02;letter-spacing:-.055em; }
+    .section-note { max-width:380px;color:var(--muted);font-size:14px;line-height:1.7; }
+    .reveal { opacity:0; transform:translateY(35px); transition:opacity .75s ease,transform .75s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+
+    .about-grid { display:grid;grid-template-columns:.9fr 1.1fr;gap:18px; }
+    .glass { border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,rgba(16,21,33,.78),rgba(8,11,18,.54));box-shadow:0 35px 80px rgba(0,0,0,.22); }
+    .profile-card { min-height:390px;padding:34px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative; }
+    .profile-card::after { content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-100px;bottom:-100px;background:var(--violet);filter:blur(75px);opacity:.15; }
+    .profile-top { display:flex;align-items:center;justify-content:space-between;color:#717b8d;font-size:11px; }
+    .profile-top b { color:var(--lime);font-weight:500; }
+    .profile-quote { position:relative;z-index:1;font-size:clamp(24px,3vw,37px);line-height:1.28;letter-spacing:-.04em;font-weight:600; }
+    .profile-quote em { font-style:normal;color:var(--cyan); }
+    .profile-meta { color:var(--muted);font-size:12px; }
+    .stats { display:grid;grid-template-columns:repeat(2,1fr);gap:18px; }
+    .stat { padding:28px;min-height:186px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .3s,border-color .3s; }
+    .stat:hover { transform:translateY(-6px);border-color:rgba(101,232,255,.35); }
+    .stat strong { font-size:44px;letter-spacing:-.06em; }
+    .stat strong small { font-size:18px;color:var(--cyan); }
+    .stat span { color:var(--muted);font-size:12px;line-height:1.5; }
+
+    .projects { display:grid;grid-template-columns:repeat(12,1fr);gap:18px; }
+    .project { grid-column:span 6;position:relative;min-height:470px;padding:30px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;transform-style:preserve-3d;transition:border-color .3s; }
+    .project:first-child { grid-column:span 7; }.project:nth-child(2){grid-column:span 5;}
+    .project:hover { border-color:rgba(101,232,255,.35); }
+    .project-num { display:flex;justify-content:space-between;color:#687286;font-size:10px;letter-spacing:.13em; }
+    .project-visual { position:absolute;width:260px;height:260px;right:-45px;top:52px;opacity:.76;transform:translateZ(20px); }
+    .project-visual .disc { position:absolute;inset:12%;border:1px solid rgba(101,232,255,.24);border-radius:50%;animation:spin 18s linear infinite; }
+    .project-visual .disc:nth-child(2){inset:28%;border-style:dashed;border-color:rgba(155,123,255,.5);animation-duration:12s;animation-direction:reverse;}
+    .project-visual .disc:nth-child(3){inset:43%;background:var(--cyan);box-shadow:0 0 40px var(--cyan);border:0;}
+    .project:nth-child(2) .project-visual .disc:nth-child(3){background:var(--violet);box-shadow:0 0 40px var(--violet);}
+    .project:nth-child(3) .project-visual .disc:nth-child(3){background:var(--lime);box-shadow:0 0 40px var(--lime);}
+    .project-copy { position:relative;z-index:2;transform:translateZ(35px); }
+    .project h3 { font-size:clamp(27px,3vw,39px);letter-spacing:-.045em;margin-bottom:12px; }
+    .project p { max-width:540px;color:var(--muted);line-height:1.65;font-size:13px; }
+    .tags { display:flex;flex-wrap:wrap;gap:7px;margin-top:21px; }
+    .tags span { padding:7px 9px;border:1px solid var(--line);border-radius:7px;color:#aeb7c8;background:rgba(0,0,0,.15);font:10px "DM Mono",monospace; }
+
+    .experience { display:grid;grid-template-columns:1fr 2fr;gap:70px; }
+    .experience-title { position:sticky;top:120px;height:max-content; }
+    .timeline { border-left:1px solid var(--line); }
+    .role { position:relative;padding:3px 0 60px 38px; }
+    .role::before { content:"";position:absolute;left:-5px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:1px solid var(--cyan);box-shadow:0 0 14px rgba(101,232,255,.6); }
+    .role-date { color:var(--cyan);font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px; }
+    .role h3 { font-size:25px;letter-spacing:-.035em;margin-bottom:6px; }
+    .company { color:#788396;font-size:13px;margin-bottom:18px; }
+    .role p { color:var(--muted);font-size:14px;line-height:1.75;max-width:690px; }
+
+    .skill-cloud { display:flex;flex-wrap:wrap;justify-content:center;gap:11px;perspective:800px; }
+    .skill { padding:13px 17px;border:1px solid var(--line);border-radius:12px;background:rgba(13,17,27,.6);color:#b5becf;font:12px "DM Mono",monospace;transition:.28s; }
+    .skill:hover { color:#081014;background:var(--cyan);border-color:var(--cyan);transform:translateY(-7px) rotateX(8deg);box-shadow:0 15px 35px rgba(101,232,255,.18); }
+
+    .contact-card { position:relative;padding:70px;overflow:hidden;text-align:center; }
+    .contact-card::before { content:"";position:absolute;width:520px;height:260px;left:50%;top:90%;transform:translate(-50%,-50%);background:var(--violet);filter:blur(110px);opacity:.2; }
+    .contact-card h2 { max-width:800px;margin:0 auto 20px; }
+    .contact-card p { color:var(--muted);max-width:550px;margin:0 auto 30px;line-height:1.7; }
+    .contact-actions { display:flex;justify-content:center;flex-wrap:wrap;gap:12px; }
+    footer { padding:26px 0 40px;display:flex;justify-content:space-between;color:#626c7f;font-size:11px;border-top:1px solid var(--line); }
+
+    @keyframes spin { to { transform:rotate(360deg); } }
+    @keyframes spin2 { to { transform:rotateY(360deg) rotateX(24deg); } }
+    @keyframes drift { to { transform:translate(8vw,7vh) scale(1.2); } }
+    @keyframes float { 50% { transform:translateY(-14px) rotateY(4deg); } }
+    @keyframes pulse { 50% { opacity:.35; } }
+    @keyframes scroll { to { transform:translate(-50%,15px);opacity:0; } }
+
+    @media (max-width: 900px) {
+      .nav-links { display:none; }
+      .hero-inner { grid-template-columns:1fr;gap:0;padding-top:150px;text-align:center; }
+      .eyebrow,.hero-actions { justify-content:center; }.intro { margin:auto; }
+      .orbital-wrap { min-height:410px; }.orbital { width:330px; }
+      .scroll-hint { display:none; }
+      .about-grid,.experience { grid-template-columns:1fr; }.experience-title { position:static; }
+      .project,.project:first-child,.project:nth-child(2){grid-column:span 12;}
+      .section-head { align-items:start;flex-direction:column; }
+    }
+    @media (max-width: 560px) {
+      .shell { width:min(100% - 28px,1180px); }
+      nav { top:10px;height:56px; }.available { font-size:0;padding:10px; }.available::after { content:"OPEN";font-size:10px; }
+      h1 { font-size:58px; }.hero-inner { padding-top:120px; }.orbital-wrap { min-height:350px; }.orbital { width:280px; }
+      section { padding:90px 0; }.stats { grid-template-columns:1fr; }.stat { min-height:145px; }
+      .profile-card,.project { min-height:420px;padding:24px; }.project-visual { width:210px;height:210px; }
+      .contact-card { padding:55px 22px; }.experience { gap:40px; } footer { flex-direction:column;gap:8px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html{scroll-behavior:auto} *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important} }
+  </style>
+</head>
+<body>
+  <div class="noise"></div><div class="progress" id="progress"></div>
+  <nav>
+    <a class="brand" href="#home"><span class="brand-mark">IR</span><span>THALLAPALLI INDRASENA REDDY<span style="color:var(--cyan)">.</span></span></a>
+    <div class="nav-links"><a href="#about">About</a><a href="#work">Work</a><a href="#journey">Journey</a><a href="#stack">Stack</a></div>
+    <a class="available mono" href="#contact"><i></i> LET'S CONNECT</a>
+  </nav>
+
+  <main>
+    <header class="hero" id="home">
+      <canvas id="space" aria-hidden="true"></canvas><div class="aurora a"></div><div class="aurora b"></div><div class="grid-floor"></div>
+      <div class="shell hero-inner">
+        <div>
+          <p class="eyebrow mono">AI / ML ENGINEER · BANGALORE</p>
+          <h1><span class="hello">Hello</span><span class="world" id="world">World!</span></h1>
+          <p class="intro">I’m <strong>Indrasena Reddy</strong>. I architect intelligent systems that turn language into action—from enterprise RAG agents and natural-language analytics to production-ready AI infrastructure.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#work">Explore my work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+            <a class="btn" href="Indrasena_Reddy_Resume.pdf" download>Download résumé <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3v12m-4-4 4 4 4-4M5 21h14"/></svg></a>
+          </div>
+        </div>
+        <div class="orbital-wrap" aria-hidden="true">
+          <div class="orbital" id="orbital">
+            <div class="ring r1"><i class="satellite"></i></div><div class="ring r2"><i class="satellite"></i></div><div class="ring r3"><i class="satellite"></i></div><div class="core"></div>
+            <span class="orbit-label l1 mono">RAG_SYSTEMS</span><span class="orbit-label l2 mono">AI_AGENTS</span><span class="orbit-label l3 mono">LLMOPS</span>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-hint mono"><span></span>Scroll to initialize</div>
+    </header>
+
+    <section id="about"><div class="shell">
+      <div class="section-head reveal"><div><p class="kicker mono">01 / Profile</p><h2>Building intelligence<br>with intention.</h2></div><p class="section-note">I work where AI research meets reliable engineering—turning ambitious ideas into useful, secure, production-oriented systems.</p></div>
+      <div class="about-grid">
+        <article class="profile-card glass reveal"><div class="profile-top mono"><span>INDRA.PROFILE</span><b>● ONLINE</b></div><p class="profile-quote">I make complex AI feel <em>useful</em>, contextual, and ready for the real world.</p><p class="profile-meta mono">AI/ML ENGINEER · AGENT ARCHITECT · CLOUD BUILDER</p></article>
+        <div class="stats">
+          <article class="stat glass reveal"><strong>10<small>+</small></strong><span>AI, ML & data systems<br>designed and delivered</span></article>
+          <article class="stat glass reveal"><strong>3</strong><span>Enterprise platforms:<br>VYN, Vinny & Wikihire</span></article>
+          <article class="stat glass reveal"><strong>86<small>%</small></strong><span>B.Tech in Artificial<br>Intelligence</span></article>
+          <article class="stat glass reveal"><strong>∞</strong><span>Curiosity for systems<br>that learn and reason</span></article>
+        </div>
+      </div>
+    </div></section>
+
+    <section id="work"><div class="shell">
+      <div class="section-head reveal"><div><p class="kicker mono">02 / Selected systems</p><h2>Ideas, engineered<br>into impact.</h2></div><p class="section-note">A selection of enterprise systems spanning autonomous analytics, support intelligence, recruitment, and cloud infrastructure.</p></div>
+      <div class="projects">
+        <article class="project glass tilt reveal"><div class="project-num mono"><span>01 / FLAGSHIP</span><span>ENTERPRISE AI</span></div><div class="project-visual"><i class="disc"></i><i class="disc"></i><i class="disc"></i></div><div class="project-copy"><h3>VYN Insights</h3><p>An autonomous analytics agent translating natural language into verified MongoDB pipelines. Built with zero-trust schema RAG, HyDE retrieval, multi-tenant isolation, PII guardrails, and adaptive data visualization.</p><div class="tags"><span>LangGraph</span><span>RAG</span><span>MongoDB Vector Search</span><span>React</span><span>OpenAI</span></div></div></article>
+        <article class="project glass tilt reveal"><div class="project-num mono"><span>02 / ASSISTANT</span><span>CONTEXT AI</span></div><div class="project-visual"><i class="disc"></i><i class="disc"></i><i class="disc"></i></div><div class="project-copy"><h3>Vinny</h3><p>A screen-aware internal AI assistant with a three-layer semantic cache, deterministic intent routing, scalable conversation memory, and human escalation.</p><div class="tags"><span>Node.js</span><span>LangChain</span><span>Gemini</span><span>Vector Search</span></div></div></article>
+        <article class="project glass tilt reveal"><div class="project-num mono"><span>03 / PLATFORM</span><span>CLOUD SYSTEMS</span></div><div class="project-visual"><i class="disc"></i><i class="disc"></i><i class="disc"></i></div><div class="project-copy"><h3>Wikihire</h3><p>An enterprise AI recruitment and requisition platform. Co-engineered backend routing and a full cloud-native GCP migration with Terraform, isolated environments, and zero-trust IAM.</p><div class="tags"><span>GCP</span><span>Terraform</span><span>PostgreSQL</span><span>Docker</span><span>REST APIs</span></div></div></article>
+        <article class="project glass tilt reveal"><div class="project-num mono"><span>04 / ENGINE</span><span>AI MIGRATION</span></div><div class="project-copy"><h3>Legacy SQL<br>Migration Engine</h3><p>An LLM-powered translation engine that converts legacy SQL into BigQuery-compatible syntax, adapting schemas and functions automatically to accelerate database migrations.</p><div class="tags"><span>Python</span><span>LLMs</span><span>BigQuery</span><span>SQL Parsing</span></div></div></article>
+      </div>
+    </div></section>
+
+    <section id="journey"><div class="shell experience">
+      <div class="experience-title reveal"><p class="kicker mono">03 / Journey</p><h2>Always<br>in motion.</h2></div>
+      <div class="timeline">
+        <article class="role reveal"><div class="role-date mono">JUN 2025 — PRESENT · BANGALORE</div><h3>AI / ML Engineer</h3><div class="company">Onusworks</div><p>Building enterprise RAG assistants, LangGraph agent architectures, natural-language database pipelines, predictive logistics models, and scalable APIs. Co-engineering cloud infrastructure and AI products across GCP, Snowflake, MongoDB, and modern LLM stacks.</p></article>
+        <article class="role reveal"><div class="role-date mono">FEB 2025 — MAY 2025 · CHENNAI</div><h3>Machine Learning Engineer Intern</h3><div class="company">VCodez</div><p>Led end-to-end model development, engineered an AI outfit visualization system, shipped ML into real-time applications, built stakeholder dashboards, and mentored junior interns across Python and machine learning.</p></article>
+        <article class="role reveal"><div class="role-date mono">2021 — 2025 · CHENNAI</div><h3>B.Tech in Artificial Intelligence</h3><div class="company">Dr. M.G.R. University · 86%</div><p>Built the technical foundation for a career spanning machine learning, intelligent backend systems, analytics, and production AI engineering.</p></article>
+      </div>
+    </div></section>
+
+    <section id="stack"><div class="shell">
+      <div class="section-head reveal"><div><p class="kicker mono">04 / Capabilities</p><h2>Tools of the trade.</h2></div><p class="section-note">An evolving toolkit for designing, building, deploying, and understanding intelligent systems.</p></div>
+      <div class="skill-cloud reveal"><span class="skill">AI Agents</span><span class="skill">LangGraph</span><span class="skill">RAG</span><span class="skill">LLMs</span><span class="skill">Python</span><span class="skill">Node.js</span><span class="skill">LangChain</span><span class="skill">MongoDB</span><span class="skill">Vector Search</span><span class="skill">GCP</span><span class="skill">Terraform</span><span class="skill">Docker</span><span class="skill">Snowflake</span><span class="skill">BigQuery</span><span class="skill">React</span><span class="skill">REST APIs</span><span class="skill">Machine Learning</span><span class="skill">NLP</span><span class="skill">Prompt Engineering</span><span class="skill">Power BI</span></div>
+    </div></section>
+
+    <section id="contact"><div class="shell"><div class="contact-card glass reveal"><p class="kicker mono">05 / Start a conversation</p><h2>Have a hard problem?<br>Let’s make it intelligent.</h2><p>I’m always interested in ambitious AI products, thoughtful engineering, and conversations about what intelligent systems can become.</p><div class="contact-actions"><a class="btn primary" href="mailto:thallapalliindrasenareddy@gmail.com">Send an email <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m4 6 8 6 8-6v12H4V6Z"/></svg></a><a class="btn" href="tel:+917675032037">+91 76750 32037</a></div></div></div></section>
+  </main>
+  <footer class="shell"><span>© 2026 THALLAPALLI INDRASENA REDDY</span><span class="mono">BUILT WITH CURIOSITY + CODE</span></footer>
+
+  <script>
+    const canvas=document.getElementById('space'),ctx=canvas.getContext('2d');let dots=[],mouse={x:.5,y:.5};
+    function resize(){const d=Math.min(devicePixelRatio,2);canvas.width=innerWidth*d;canvas.height=innerHeight*d;ctx.setTransform(d,0,0,d,0,0);dots=Array.from({length:Math.min(130,innerWidth/8)},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,z:Math.random()*1.7+.25,r:Math.random()*1.4+.3}));}
+    function space(){ctx.clearRect(0,0,innerWidth,innerHeight);for(const p of dots){p.y-=p.z*.12;if(p.y<-5)p.y=innerHeight+5;const dx=(mouse.x-.5)*p.z*18,dy=(mouse.y-.5)*p.z*18;ctx.beginPath();ctx.arc(p.x+dx,p.y+dy,p.r*p.z,0,7);ctx.fillStyle=`rgba(170,225,255,${.13+p.z*.18})`;ctx.fill();}requestAnimationFrame(space)}
+    resize();space();addEventListener('resize',resize);
+    addEventListener('pointermove',e=>{mouse.x=e.clientX/innerWidth;mouse.y=e.clientY/innerHeight;document.documentElement.style.setProperty('--mx',e.clientX+'px');document.documentElement.style.setProperty('--my',e.clientY+'px');const o=document.getElementById('orbital');if(o)o.style.transform=`rotateY(${(mouse.x-.5)*13}deg) rotateX(${(.5-mouse.y)*10}deg)`;});
+    addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-innerHeight;document.getElementById('progress').style.width=(scrollY/h*100)+'%';});
+    const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+    document.querySelectorAll('.tilt').forEach(card=>{card.addEventListener('pointermove',e=>{if(innerWidth<900)return;const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform=`perspective(900px) rotateY(${x*4}deg) rotateX(${-y*4}deg)`});card.addEventListener('pointerleave',()=>card.style.transform='');});
+    const words=['World!','Intelligence.','Possibility.','Impact.'];let wi=0;setInterval(()=>{const w=document.getElementById('world');w.animate([{opacity:1,transform:'translateY(0)'},{opacity:0,transform:'translateY(-12px)'}],{duration:260,fill:'forwards'}).onfinish=()=>{wi=(wi+1)%words.length;w.textContent=words[wi];w.animate([{opacity:0,transform:'translateY(12px)'},{opacity:1,transform:'translateY(0)'}],{duration:360,fill:'forwards'})}},2700);
+  </script>
+</body>
+</html>
